@@ -20,10 +20,6 @@ struct Status {
     string message;
 }
 
-event Request(
-    address indexed senderContract, uint256 indexed messageId, uint64 startBlock, uint64 endBlock, string query
-);
-
 interface IClient {
     function handleSuccess(Response memory response) external;
 

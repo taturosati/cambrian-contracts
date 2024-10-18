@@ -21,12 +21,20 @@ clean:
 anvil-start:
 	@anvil
 
-# Target to deploy the router
 .PHONY: deploy-router
 deploy-router: build
 	@echo "Using keystore path: $(KEYSTORE_PATH)"
 
-	@forge script ./script/Router.s.sol \
+	@forge script ./script/DeployRouter.s.sol \
+	    --rpc-url $(RPC_URL) \
+		--keystore $(KEYSTORE_PATH) \
+		--broadcast
+
+.PHONY: upgrade-router
+upgrade-router: build
+	@echo "Using keystore path: $(KEYSTORE_PATH)"
+
+	@forge script ./script/UpgradeRouter.s.sol \
 	    --rpc-url $(RPC_URL) \
 		--keystore $(KEYSTORE_PATH) \
 		--broadcast
